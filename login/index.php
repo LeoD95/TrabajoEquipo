@@ -52,7 +52,7 @@
 			              			Ingresar
 		              			</button>
 	              			</div>
-	            		</div><!-- /.col -->
+	            		</div><!-- /..col -->
 					</div>
 				</form>
 			</div>			

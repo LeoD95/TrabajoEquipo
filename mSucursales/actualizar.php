@@ -1,5 +1,5 @@
 <?php
-//se manda llamar la conexion
+//se manda llamar la conexion.
 include("../conexion/conexion.php");
 
 $nsucursal    = $_POST["numero_farmacia"];

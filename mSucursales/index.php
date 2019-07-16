@@ -14,7 +14,7 @@ $opcionMenu="A";
 	<link rel="shortcut icon" type="image/x-icon" href="../img/logo.png">
 	<title >Sucursales </title>
 
-	<!-- Meta para compatibilidad en dispositivos mobiles -->
+	<!-- Meta para compatibilidad en disposqqqitivos mobiles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap 3.3.5 -->

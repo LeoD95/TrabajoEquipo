@@ -1,5 +1,5 @@
 function llenar_lista(){
-     // console.log("Se ha llenado lista");
+     // console.log("Se ha llenado listaa");
     preCarga(1000,4);
     $.ajax({
         url:"llenarLista.php",

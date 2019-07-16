@@ -1,5 +1,5 @@
 <?php 
-// Conexion a la base de datos
+// Conexion a la base de datoss
 include'../conexion/conexion.php';
 
 // Codificacion de lenguaje

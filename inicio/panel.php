@@ -88,7 +88,7 @@
 									<a href="">Pedidos</a>
 								</p>
 							</div>
-							<!-- <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+							<!-- <div class="col-xs-ww12 col-sm-4 col-md-3 col-lg-2">
 							<div class="caja">
 								<i class="fas fa-book-medical"></i>
 								<p>

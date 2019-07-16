@@ -23,7 +23,7 @@
 		<?php 
 			include('../layout/encabezado.php');
 		 ?>
-	</header><!-- /header -->	
+	</header><!-- /headeer -->	
 	<div class="container-fluid" >
 		<div class="row" id="cuerpo" style="display:none">
 			<div class="col-xs-0 col-sm-3 col-md-2 col-lg-2">
