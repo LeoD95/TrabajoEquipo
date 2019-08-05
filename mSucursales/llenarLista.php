@@ -21,9 +21,9 @@ $consulta=mysql_query("SELECT
 				                    <thead align="center">
 				                      <tr class="info" >
 				                        <th>#</th>
-				                        <th>Ubicacion</th>
-				                        <th>Encargado</th>
 										<th>Numero de Sucursal</th>
+										<th>Ubicacion</th>
+				                        <th>Encargado</th>																				
 				                        <th>Editar</th> 
 				                        <th>Estatus</th>
 				                      </tr>
@@ -34,10 +34,11 @@ $consulta=mysql_query("SELECT
 				                    $n=1;
 				                    while ($row=mysql_fetch_row($consulta)) {
 										$idFarmacia   = $row[0];
-										$nsucursal = $row[1];
-										$ubicacion = $row[2];
-										$encargado  = $row[3];
-										$activo      = $row[7];
+										$nsucursal = $row[1];										
+										$encargado  = $row[2];
+										$ubicacion = $row[3];
+										$activo      = $row[4];
+
 										$checado=($activo==1)?'checked':'';		
 										$desabilitar=($activo==0)?'disabled':'';
 										$claseDesabilita=($activo==0)?'desabilita':'';
@@ -49,25 +50,25 @@ $consulta=mysql_query("SELECT
 				                          </p>
 				                        </td>
 				                        <td>
-																<p id="<?php echo "tNsucursal".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $nomCarrera; ?>
+																<p id="<?php echo "nsucursal".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          	<?php echo $nsucursal; ?>
 				                          </p>
 				                        </td>
 				                        <td>
 																<p id="<?php echo "tUbicacion".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $abreviatura; ?>
+				                          	<?php echo $ubicacion; ?>
 				                          </p>
 										  <td>
 																<p id="<?php echo "tEncargado".$n; ?>" class="<?php echo $claseDesabilita; ?>">
-				                          	<?php echo $abreviatura; ?>
+				                          	<?php echo $encargado	; ?>
 				                          </p>
 				                        </td>
 				                        <td>
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?>  type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
+											  						'<?php echo $nsucursal ?>',
+				                          							'<?php echo $ubicacion ?>',
 				                          							'<?php echo $encargado ?>',
-																	'<?php echo $ubicacion ?>',
-				                          							'<?php echo $abreviatura ?>',
 																	'<?php echo $idFarmacia ?>'
 				                          							);">
 				                          	<i class="far fa-edit"></i>
@@ -86,10 +87,10 @@ $consulta=mysql_query("SELECT
 
 				                    <tfoot align="center">
 				                      <tr class="info">
-										    <th>#</th>
-				                        <th>Encargado</th>
-				                        <th>Ubicacion</th>
+									  <th>#</th>
 										<th>Numero de Sucursal</th>
+										<th>Ubicacion</th>
+				                        <th>Encargado</th>																				
 				                        <th>Editar</th> 
 				                        <th>Estatus</th>
 				                      </tr>
@@ -136,7 +137,7 @@ $consulta=mysql_query("SELECT
                               }
                           },
                          {
-                              text: 'Nueva Carrera',
+                              text: 'Nueva farmacia',
                               action: function (  ) {
                                       ver_alta();
                               },

@@ -3,7 +3,7 @@ include("../sesiones/verificar_sesion.php");
 include'../conexion/conexion.php';
 
 // Variables de configuración
-$titulo="Catálago de Carreras";
+$titulo="Catálago de Farmacias";
 $opcionMenu="A";
 
  ?>
@@ -78,7 +78,7 @@ $opcionMenu="A";
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 										<div class="form-group">
-											<label for="abreviatura">Numero de la sucuarsal:</label>
+											<label for="abreviatura">Numero de la sucursal:</label>
 											<input type="text" id="nsucursal" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
 										</div>
 									</div>
@@ -126,7 +126,7 @@ $opcionMenu="A";
 					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
 						<div class="form-group">
 							<label for="nombreE">Nombre del encargado:</label>
-							<input type="text" id="nombreE" class="form-control " autofocus="" required="" placeholder="Escribe el nombre del encargado">
+							<input type="text" id="encargadoE" class="form-control " autofocus="" required="" placeholder="Escribe el nombre del encargado">
 						</div>
 					</div>
 					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">

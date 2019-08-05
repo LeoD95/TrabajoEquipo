@@ -2,7 +2,7 @@
 //se manda llamar la conexion.
 include("../conexion/conexion.php");
 
-$nsucursal    = $_POST["numero_farmacia"];
+$nsucursal    = $_POST["nsucursal"];
 $encargado= $_POST["encargado"];
 $ubicacion  = $_POST["ubicacion"];
 

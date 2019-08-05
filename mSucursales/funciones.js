@@ -72,12 +72,12 @@ $("#frmAlta").submit(function(e){
                    
                  },
             success:function(respuesta){
-              
+              console.log(respuesta);
             alertify.set('notifier','position', 'bottom-right');
             alertify.success('Se ha guardado el registro' );
             $("#frmAlta")[0].reset();
             $("#nsucursal").focus();
-            // llenarLista();
+            //llenarLista();
             },
             error:function(xhr,status){
                 alert(xhr);
@@ -90,9 +90,10 @@ $("#frmAlta").submit(function(e){
 function abrirModalEditar(nsucursal,ubicacion,encargado,ide){
    
     $("#frmActuliza")[0].reset();
-    $("#nsucursalE").val(nsucursal);
     $("#ubicacionE").val(ubicacion);
     $("#encargadoE").val(encargado);
+    $("#nsucursalE").val(nsucursal);
+    
   
     $("#idE").val(ide);
 
@@ -107,9 +108,10 @@ function abrirModalEditar(nsucursal,ubicacion,encargado,ide){
 
 $("#frmActuliza").submit(function(e){
   
-    var nsucursal    = $("#nsucursalE").val();
-    var ubicacion   = $("#ubicacionE").val();
     var encargado    = $("#encargadoE").val();
+    var ubicacion   = $("#ubicacionE").val();    
+    var nsucursal    = $("#nsucursalE").val();
+    
    
     var ide       = $("#idE").val();
 
@@ -119,9 +121,11 @@ $("#frmActuliza").submit(function(e){
             dateType:"html",
             data:{
                    
-                'nsucursal':nsucursal,
                 'ubicacion':ubicacion,
                 'encargado':encargado,
+                'nsucursal':nsucursal,
+            
+                
                     'ide':ide
                  },
             success:function(respuesta){

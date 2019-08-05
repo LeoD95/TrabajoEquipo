@@ -85,7 +85,7 @@
 							<div class="caja">
 							<i class="fas fa-notes-medical"></i>
 								<p>
-									<a href="">Pedidos</a>
+									<a href="../mPedidos/index.php">Pedidos</a>
 								</p>
 							</div>
 							<!-- <div class="col-xs-ww12 col-sm-4 col-md-3 col-lg-2">
@@ -112,7 +112,7 @@
 							<div class="caja">
 								<i class="fas fa-file-medical"></i>
 								<p>
-									<a href="">receta</a>
+									<a href="../mRecetas/index.php">receta</a>
 								</p>
 							</div>
 						</div>
@@ -128,7 +128,7 @@
 							<div class="caja">
 								<i class="fas fa-book-medical"></i>
 								<p>
-									<a href="">Catalogo medicamentos</a>
+									<a href="../mCatalogo_medicamento">Catalogo medicamentos</a>
 								</p>
 							</div>
 						</div>
