@@ -6,7 +6,7 @@
 							<a id="mnuA" href="index.php"><i class="fas fa-certificate"></i></i> <label class="modulo">Catálogo</label></a>
 						</li>
 						<li class="list-unstyled icoMedia">
-							<a id="mnuB" href="#"><i class="far fa-file-alt"></i></i> <label class="modulo">Reportes</label></a>
+						<a id="mnuB" href="#"  onclick="imprimir();"><i class="far fa-file-alt"></i></i> <label class="modulo">Reportes</label></a>
 						</li>
 						<li class="list-unstyled divisor">
 							<hr>

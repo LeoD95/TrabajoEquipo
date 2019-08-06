@@ -28,7 +28,7 @@
 		<div class="row" id="cuerpo" style="display:none">
 			<div class="col-xs-0 col-sm-3 col-md-2 col-lg-2">
 				<?php 
-					include('../layout/menuv.php');
+					include('../layout/menuv.php'); 
 				?>
 			</div>
 

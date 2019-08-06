@@ -17,7 +17,10 @@ $consulta=mysql_query("SELECT
 								id_registro,
 								fecha_registro,
 								hora_registro, 
-								activo								
+								activo,
+								id_paciente,
+								id_doctor,
+								id_medicamento								
 						FROM recetas
 						ORDER BY id_paciente DESC",$conexion) or die (mysql_error());
 // $row=mysql_fetch_row($consulta)
@@ -54,7 +57,11 @@ $consulta=mysql_query("SELECT
 										$checado=($activo==1)?'checked':'';		
 										$desabilitar=($activo==0)?'disabled':'';
 										$claseDesabilita=($activo==0)?'desabilita':'';
-															?>
+
+										$id_pac = $row[11];
+										$id_doc = $row[12];
+										$id_med = $row[13];
+									?>
 				                      <tr>
 				                        <td >
 				                          <p id="<?php echo "tConsecutivo".$n; ?>" class="<?php echo $claseDesabilita; ?>">
@@ -95,10 +102,10 @@ $consulta=mysql_query("SELECT
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?>  type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
 				                          							
-				                          							'<?php echo $idPaciente ?>',
-				                          							'<?php echo $idDoctor ?>',
+				                          							'<?php echo $id_pac ?>',
+				                          							'<?php echo $id_doc ?>',
 				                          							'<?php echo $descripcion ?>',
-				                          							'<?php echo $idMedicamento ?>',
+				                          							'<?php echo $id_med ?>',
 				                          							'<?php echo $cantidad ?>',
 															        '<?php echo $codigoReceta ?>',
 										  							'<?php echo $idReceta ?>'
@@ -162,7 +169,7 @@ $consulta=mysql_query("SELECT
                             //     text: 'Registros',
                             //     className: 'btn btn-default'
                             // },
-                          {
+                          /*{
                               extend: 'excel',
                               text: 'Exportar a Excel',
                               className: 'btn btn-login',
@@ -170,7 +177,7 @@ $consulta=mysql_query("SELECT
                               exportOptions: {
                                   columns: ':visible'
                               }
-                          },
+                          }*/,
                          {
                               text: 'Nueva Receta',
                               action: function (  ) {

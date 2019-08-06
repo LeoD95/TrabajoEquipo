@@ -13,7 +13,7 @@
 			$this->SetFont('Arial', 'B', 15);
 			$this->Cell(30);
 			$this->SetX(100);
-			$this->Cell(100, 10, 'Reporte de Sucursales', 8,0,'C');
+			$this->Cell(100, 10, 'Reporte de Recetas', 8,0,'C');
 			$this->Ln(30);
 
 		}

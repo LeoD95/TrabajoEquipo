@@ -11,12 +11,12 @@ $hora=date ("H:i:s");
 $valor =($valor==1)?0:1;
 
 mysql_query("SET NAMES utf8");
- $insertar = mysql_query("UPDATE personas SET
+ $insertar = mysql_query("UPDATE recetas SET
 							activo='$valor',
 							fecha_registro='$fecha',
 							hora_registro='$hora',
 							id_registro='1'
-						WHERE id_persona='$id'
+						WHERE id_receta='$id'
 							 ",$conexion)or die(mysql_error());
 
 ?>

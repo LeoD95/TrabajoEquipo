@@ -24,8 +24,7 @@ $opcionMenu="A";
 	<link rel="stylesheet" href="../plugins/fontawesome-free-5.8.1-web/css/all.min.css">
 
 	<!-- DataTableButtons -->
-     <link rel="stylesheet" href="../plugins/dataTableButtons/buttons.dataTables.min.css">
-
+    
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
 
@@ -66,24 +65,32 @@ $opcionMenu="A";
 				        <section id="alta" style="display: none">
             				<form id="frmAlta">
 								<div class="row">
-									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-9">
-										<div class="form-group">
-											<label for="nombre">Encargado:</label>
-											<input type="text" id="encargado" class="form-control " autofocus="" required="" placeholder="Escribe el nombre del encargado">
-										</div>
-										<div class="form-group">
-											<label for="nombre">Ubicacion:</label>
-											<input type="text" id="ubicacion" class="form-control " autofocus="" required="" placeholder="Escribe las ubicacion">
-										</div>
+									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="nombre">Nombre de la farmacia:</label>
+												<input type="text" id="nombre" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
+											</div>
 									</div>
-									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-										<div class="form-group">
-											<label for="abreviatura">Numero de la sucursal:</label>
-											<input type="text" id="nsucursal" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
+										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="nombre">Encargado:</label>
+												<input type="text" id="encargado" class="form-control " autofocus="" required="" placeholder="Escribe el nombre del encargado">
+											</div>
 										</div>
-									</div>
-									
-								</div>
+										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="nombre">Ubicacion:</label>
+												<input type="text" id="ubicacion" class="form-control " autofocus="" required="" placeholder="Escribe las ubicacion">
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="abreviatura">Numero de la sucursal:</label>
+												<input type="text" id="nsucursal" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
+											</div>
+										</div>	
+									</div>								
+								
 								<div class="row">
 									<div class="col-lg-12">
 										<button type="button" id="btnLista" class="btn btn-login  btn-flat  pull-left">Lista de Sucursales</button>
@@ -123,24 +130,31 @@ $opcionMenu="A";
 	      <div class="modal-body">
 				<input type="hidden" id="idE">
 				<div class="row">
-					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
-						<div class="form-group">
-							<label for="nombreE">Nombre del encargado:</label>
-							<input type="text" id="encargadoE" class="form-control " autofocus="" required="" placeholder="Escribe el nombre del encargado">
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-						<div class="form-group">
-							<label for="abreviaturaE">Ubicacion:</label>
-							<input type="text" id="ubicacionE" class="form-control " required="" placeholder="Escribe la Ubicacion">
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-						<div class="form-group">
-							<label for="abreviaturaE">Numero de la sucursal:</label>
-							<input type="text" id="nsucursalE" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
-						</div>
-					</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="nombre">Nombre de la farmacia:</label>
+												<input type="text" id="nombreE" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
+											</div>
+									</div>
+										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="nombre">Encargado:</label>
+												<input type="text" id="encargadoE" class="form-control " autofocus="" required="" placeholder="Escribe el nombre del encargado">
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="nombre">Ubicacion:</label>
+												<input type="text" id="ubicacionE" class="form-control " autofocus="" required="" placeholder="Escribe las ubicacion">
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+											<div class="form-group">
+												<label for="abreviatura">Numero de la sucursal:</label>
+												<input type="text" id="nsucursalE" class="form-control " required="" placeholder="Escribe el numero de la sucursal">
+											</div>
+										</div>	
+													
 					<hr class="linea">
 				</div>
 	      </div>
@@ -204,6 +218,40 @@ $opcionMenu="A";
     <!-- Llamar la funcion para llenar la lista -->
 	<script type="text/javascript">
 	  llenar_lista();
+
+	  function cambiar_contra(){
+            $("#modalContra").modal("show");
+            $("#frmContra")[0].reset();
+            $('#modalContra').on('shown.bs.modal', function () {
+                $('#pass').focus();            
+            }); 
+        }
+                        function actualizar_pass(){
+            var pass   = $("#pass").val();
+            $.ajax({
+                url:"../sesiones/actualizar_pass2.php",
+                type:"POST",
+                dateType:"html",
+                data:{
+                    'pass':pass
+                },
+                success:function(respuesta){
+                    alertify.warning(respuesta);
+                if (respuesta == "ok"){
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.success('Se ha actualizado la contraseña' );
+                    $("#frmContra")[0].reset();
+                    $("#modalContra").modal("hide");
+                }else{
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error('La contraseña es igual a la Anterior' );
+                }
+                },
+                error:function(xhr,status){
+                    alert(xhr);
+                },
+            });
+        }
 	</script>
 
     <!-- Inicializador de elemento -->
@@ -218,7 +266,9 @@ $opcionMenu="A";
 		var letra ='<?php echo $opcionMenu; ?>';
 		$(document).ready(function() { menuActivo(letra); });
 	</script>
+	
 
+	
 	<script type="text/javascript" src="../plugins/stacktable/stacktable.js"></script> 
 </body>
 </html>

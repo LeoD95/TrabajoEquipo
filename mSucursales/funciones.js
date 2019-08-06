@@ -36,7 +36,7 @@ function imprimir(){
     ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
   }
 function ver_alta(){
-    preCarga(800,4);
+    //preCarga(800,4);
     $("#lista").slideUp('low');
     $("#alta").slideDown('low');
     $("#nsucursal").focus();
@@ -54,7 +54,8 @@ $('#btnLista').on('click',function(){
 });
 
 $("#frmAlta").submit(function(e){
-  
+
+    var nombre    = $("#nombre").val();
     var nsucursal    = $("#nsucursal").val();
     var ubicacion   = $("#ubicacion").val();
     var encargado   = $("#encargado").val();
@@ -66,6 +67,7 @@ $("#frmAlta").submit(function(e){
             type:"POST",
             dateType:"html",
             data:{
+                    'nombre':nombre,
                     'nsucursal':nsucursal,
                     'ubicacion':ubicacion,
                     'encargado':encargado,
@@ -76,7 +78,7 @@ $("#frmAlta").submit(function(e){
             alertify.set('notifier','position', 'bottom-right');
             alertify.success('Se ha guardado el registro' );
             $("#frmAlta")[0].reset();
-            $("#nsucursal").focus();
+            $("#nombre").focus();
             //llenarLista();
             },
             error:function(xhr,status){
@@ -87,9 +89,11 @@ $("#frmAlta").submit(function(e){
         return false;
 });
 
-function abrirModalEditar(nsucursal,ubicacion,encargado,ide){
+function abrirModalEditar(nombre,nsucursal,ubicacion,encargado,ide){
+    alertify.success(nombre);
    
     $("#frmActuliza")[0].reset();
+    $("#nombreE").val(nombre);
     $("#ubicacionE").val(ubicacion);
     $("#encargadoE").val(encargado);
     $("#nsucursalE").val(nsucursal);
@@ -102,12 +106,14 @@ function abrirModalEditar(nsucursal,ubicacion,encargado,ide){
     $("#modalEditar").modal("show");
 
      $('#modalEditar').on('shown.bs.modal', function () {
-         $('#nsucursalE').focus();
+         $('#nombreE').focus();
      });   
 }
 
 $("#frmActuliza").submit(function(e){
-  
+
+
+    var nombre       =$("#nombreE").val();
     var encargado    = $("#encargadoE").val();
     var ubicacion   = $("#ubicacionE").val();    
     var nsucursal    = $("#nsucursalE").val();
@@ -120,7 +126,7 @@ $("#frmActuliza").submit(function(e){
             type:"POST",
             dateType:"html",
             data:{
-                   
+                'nombre':nombre,
                 'ubicacion':ubicacion,
                 'encargado':encargado,
                 'nsucursal':nsucursal,
@@ -148,7 +154,8 @@ function status(concecutivo,id){
     var nomToggle = "#interruptor"+concecutivo;
     var nomBoton  = "#boton"+concecutivo;
     var numero    = "#tConsecutivo"+concecutivo;
-    var nsucursal   = "#tNsucursal"+concecutivo;
+    var nombre   = "#tNombre"+concecutivo;
+    var nsucursal   = "#Nsucursal"+concecutivo;
     var ubicacion   = "#tUbicacion"+concecutivo;
     var encargado   = "#tEncargado"+concecutivo;
     // var carrera  = "#tCarrera"+concecutivo;
@@ -160,6 +167,7 @@ function status(concecutivo,id){
         alertify.success('Registro habilitado' );
         $(nomBoton).removeAttr("disabled");
         $(numero).removeClass("desabilita");
+        $(nombre).removeClass("desabilita");
         $(nsucursal).removeClass("desabilita");
         $(ubicacion).removeClass("desabilita");
         $(encargado).removeClass("desabilita");
@@ -170,10 +178,11 @@ function status(concecutivo,id){
         var valor=1;
         alertify.error('Registro deshabilitado' );
         $(nomBoton).attr("disabled", "disabled");
-        $(numero).removeClass("desabilita");
-        $(nsucursal).removeClass("desabilita");
-        $(ubicacion).removeClass("desabilita");
-        $(encargado).removeClass("desabilita");
+        $(numero).addClass("desabilita");
+        $(nombre).addClass("desabilita");
+        $(nsucursal).addClass("desabilita");
+        $(ubicacion).addClass("desabilita");
+        $(encargado).addClass("desabilita");
         // $(noControl).addClass("desabilita");
         // $(carrera).addClass("desabilita");
        // $(sexo).addClass("desabilita");

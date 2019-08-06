@@ -2,6 +2,7 @@
 //se manda llamar la conexion.
 include("../conexion/conexion.php");
 
+$nombre    = $_POST["nombre"];
 $nsucursal    = $_POST["nsucursal"];
 $encargado= $_POST["encargado"];
 $ubicacion  = $_POST["ubicacion"];
@@ -18,6 +19,7 @@ $hora=date ("H:i:s");
 mysql_query("SET NAMES utf8");
  $insertar = mysql_query("INSERT INTO farmacias 
  								(
+								nombre,
  								numero_farmacia,
  								ubicacion,
 								encargado,
@@ -28,6 +30,7 @@ mysql_query("SET NAMES utf8");
  								)
 							VALUES
 								(
+								'$nombre',
  								'$nsucursal',
 								 '$ubicacion',
  								'$encargado',

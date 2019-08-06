@@ -120,7 +120,7 @@
 							<div class="caja">
 								<i class="fas fa-file-medical"></i>
 								<p>
-									<a href="">Detalle receta</a>
+									<a href="../mDetalle_receta/index.php">Detalle receta</a>
 								</p>
 							</div>
 						</div>

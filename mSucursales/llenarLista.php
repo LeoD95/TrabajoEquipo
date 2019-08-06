@@ -8,6 +8,7 @@ mysql_query("SET NAMES utf8");
 // Consulta a la base de datos
 $consulta=mysql_query("SELECT 
 													id_farmacia,
+													nombre,
 													numero_farmacia,
 													encargado,
 													ubicacion,
@@ -21,6 +22,7 @@ $consulta=mysql_query("SELECT
 				                    <thead align="center">
 				                      <tr class="info" >
 				                        <th>#</th>
+										<th>Nombre de Sucursal</th>
 										<th>Numero de Sucursal</th>
 										<th>Ubicacion</th>
 				                        <th>Encargado</th>																				
@@ -34,10 +36,11 @@ $consulta=mysql_query("SELECT
 				                    $n=1;
 				                    while ($row=mysql_fetch_row($consulta)) {
 										$idFarmacia   = $row[0];
-										$nsucursal = $row[1];										
-										$encargado  = $row[2];
-										$ubicacion = $row[3];
-										$activo      = $row[4];
+										$nombre = $row[1];
+										$nsucursal = $row[2];										
+										$encargado  = $row[3];
+										$ubicacion = $row[4];
+										$activo      = $row[5];
 
 										$checado=($activo==1)?'checked':'';		
 										$desabilitar=($activo==0)?'disabled':'';
@@ -49,8 +52,13 @@ $consulta=mysql_query("SELECT
 				                          	<?php echo "$n"; ?>
 				                          </p>
 				                        </td>
+										<td>
+											<p id="<?php echo "tNombre".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+				                          		<?php echo $nombre; ?>
+				                          	</p>
+				                        </td>
 				                        <td>
-																<p id="<?php echo "nsucursal".$n; ?>" class="<?php echo $claseDesabilita; ?>">
+																<p id="<?php echo "Nsucursal".$n; ?>" class="<?php echo $claseDesabilita; ?>">
 				                          	<?php echo $nsucursal; ?>
 				                          </p>
 				                        </td>
@@ -66,6 +74,7 @@ $consulta=mysql_query("SELECT
 				                        <td>
 				                          <button id="<?php echo "boton".$n; ?>" <?php echo $desabilitar ?>  type="button" class="btn btn-login btn-sm" 
 				                          onclick="abrirModalEditar(
+											  						'<?php echo $nombre ?>',
 											  						'<?php echo $nsucursal ?>',
 				                          							'<?php echo $ubicacion ?>',
 				                          							'<?php echo $encargado ?>',
@@ -75,7 +84,7 @@ $consulta=mysql_query("SELECT
 				                          </button>
 				                        </td>
 				                        <td>
-											<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idCarrera; ?>);">
+											<input  data-size="small" data-style="android" value="<?php echo "$valor"; ?>" type="checkbox" <?php echo "$checado"; ?>  id="<?php echo "interruptor".$n; ?>"  data-toggle="toggle" data-on="Desactivar" data-off="Activar" data-onstyle="danger" data-offstyle="success" class="interruptor" data-width="100" onchange="status(<?php echo $n; ?>,<?php echo $idFarmacia; ?>);">
 				                        </td>
 				                      </tr>
 				                      <?php
@@ -88,6 +97,7 @@ $consulta=mysql_query("SELECT
 				                    <tfoot align="center">
 				                      <tr class="info">
 									  <th>#</th>
+									  <th>Nombre de Sucursal</th>
 										<th>Numero de Sucursal</th>
 										<th>Ubicacion</th>
 				                        <th>Encargado</th>																				
@@ -99,58 +109,59 @@ $consulta=mysql_query("SELECT
 				            </div>
 			
       <script type="text/javascript">
-        $(document).ready(function() {
-              $('#example1').DataTable( {
-                 "language": {
+			$(document).ready(function() {
+				$('#example1').DataTable( {
+					"language": {
                          // "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-                          "url": "../plugins/datatables/langauge/Spanish.json"
-                      },
-                 "order": [[ 0, "asc" ]],
-                 "paging":   true,
-                 "ordering": true,
-                 "info":     true,
-                 "responsive": true,
-                 "searching": true,
-                 stateSave: false,
-                  dom: 'Bfrtip',
-                  lengthMenu: [
-                      [ 10, 25, 50, -1 ],
-                      [ '10 Registros', '25 Registros', '50 Registros', 'Todos' ],
-                  ],
-                 columnDefs: [ {
+                         "url": "../plugins/datatables/langauge/Spanish.json"
+                     },
+                     "order": [[ 0, "asc" ]],
+                     "paging":   true,
+                     "ordering": true,
+                     "info":     true,
+                     "responsive": true,
+                     "searching": true,
+                     stateSave: false,
+                     dom: 'Bfrtip',
+                     lengthMenu: [
+                     [ 10, 25, 50, -1 ],
+                     [ '10 Registros', '25 Registros', '50 Registros', 'Todos' ],
+                     ],
+                     columnDefs: [ {
                       // targets: 0,
                       // visible: false
                   }],
                   buttons: [
+                            // {
+                            //     extend: 'pageLength',
+                            //     text: 'Registros',
+                            //     className: 'btn btn-default'
+                            // },
+                           /* {
+                            	extend: 'excel',
+                            	text: 'Exportar a Excel',
+                            	className: 'btn btn-login',
+                            	title:'Bajas-Estaditicas',
+                            	exportOptions: {
+                            		columns: ':visible'
+                            	}
+                            },*/
                             {
-                                extend: 'pageLength',
-                                text: 'Registros',
-                                className: 'btn btn-default'
+                            	text: 'Nueva Farmacia',
+                            	action: function (  ) {
+                            		ver_alta();
+                            	},
+                            	className: 'btn btn-login',
+                            	counter: 1
                             },
-                          {
-                              extend: 'excel',
-                              text: 'Exportar a Excel',
-                              className: 'btn btn-default',
-                              title:'Bajas-Estaditicas',
-                              exportOptions: {
-                                  columns: ':visible'
-                              }
-                          },
-                         {
-                              text: 'Nueva farmacia',
-                              action: function (  ) {
-                                      ver_alta();
-                              },
-                              counter: 1
-                          },
-                  ]
-              } );
-          } );
+                            ]
+                        } );
+			} );
 
-      </script>
-      <script>
-            $(".interruptor").bootstrapToggle('destroy');
-            $(".interruptor").bootstrapToggle();
-      </script>
-    
-    
+		</script>
+		<script>
+			$(".interruptor").bootstrapToggle('destroy');
+			$(".interruptor").bootstrapToggle();
+		</script>
+		
+		

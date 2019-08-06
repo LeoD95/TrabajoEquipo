@@ -1,7 +1,7 @@
 function llenar_lista(){
      // console.log("Se ha llenado lista");
     // preCarga(1000,4);
-          
+
 
     $.ajax({
         url:"llenarLista.php",
@@ -40,12 +40,11 @@ $('#btnLista').on('click',function(){
 });
 
 $("#frmAlta").submit(function(e){
-  
+
     var codigo = $("#codigo").val();
     var idMedicamento = $("#idMedicamento").val();
     var cantidad = $("#cantidad").val();
 
-    // validacion para no meter id de persona en 0
     if(idMedicamento==0){
         alertify.dialog('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
 
@@ -53,88 +52,96 @@ $("#frmAlta").submit(function(e){
         .setting({
             'title':'Información',
             'label':'Salir',
-            'message': 'Debes seleccionar el dato de un medicamento.' ,
+            'message': 'Debes seleccionar el dato de una persona.' ,
+            'onok': function(){ alertify.message('Gracias !');}
+        }).show();
+        return false;       
+    }
+    // validacion para no meter id de persona en 0
+    if(codigo==null){
+        alertify.dialog('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
+
+        alertify.alert()
+        .setting({
+            'title':'Información',
+            'label':'Salir',
+            'message': 'Debes seleccionar una receta.' ,
             'onok': function(){ alertify.message('Gracias !');}
         }).show();
         return false;       
     }
 
+    $.ajax({
+        url:"guardar.php",
+        type:"POST",
+        dateType:"html",
+        data:{
+            'codigo':codigo,
+            'idMedicamento':idMedicamento,
+            'cantidad':cantidad
+        },
+        success:function(respuesta){
 
-        $.ajax({
-            url:"guardar.php",
-            type:"POST",
-            dateType:"html",
-            data:{
-                    'codigo':codigo,
-                    'idMedicamento':idMedicamento,
-                    'cantidad':cantidad
-                 },
-            success:function(respuesta){
-              
             alertify.set('notifier','position', 'bottom-right');
             alertify.success('Se ha guardado el registro' );
             $("#frmAlta")[0].reset();
             llenar_codigo();
             llenar_medicamento();
-            },
-            error:function(xhr,status){
-                alert(xhr);
-            },
-        });
-        e.preventDefault();
-        return false;
+        },
+        error:function(xhr,status){
+            alert(xhr);
+        },
+    });
+    e.preventDefault();
+    return false;
 });
 
 function abrirModalEditar(idReceta,idMedicamento,cantidad,idDetalle){
-
+   
     $("#frmActuliza")[0].reset();
-  
-    llenar_codigoD(idReceta);
-    llenar_medicamentoD(idMedicamento)
+     llenar_codigoD(idReceta);
+    llenar_medicamentoD(idMedicamento);
     $("#cantidadE").val(cantidad);
     $("#idE").val(idDetalle);
 
     $(".select2").select2();
-
     $("#modalEditar").modal("show");
-
      $('#modalEditar').on('shown.bs.modal', function () {
-         $('#codigoE').focus();
+         $('#nombreE').focus();
      });   
 }
 
 $("#frmActuliza").submit(function(e){
-  
-    var idReceta    = $("#codigoE").val();
-    var idMedicamento   = $("#idMedicamentoE").val();
-    var cantidad   = $("#cantidadE").val();
-    var idDetalle       = $("#idE").val();
 
-        $.ajax({
-            url:"actualizar.php",
-            type:"POST",
-            dateType:"html",
-            data:{
-                    'idReceta':idReceta,
-                    'idMedicamento':idMedicamento,
-                    'cantidad':cantidad,
-                    'ide':idDetalle
-                 },
-            success:function(respuesta){
+    var idReceta         = $("#codigoE").val();
+    var idMedicamento    = $("#idMedicamentoE").val();
+    var cantidad         = $("#cantidadE").val();
+    var idDetalle        = $("#idE").val();
+
+    $.ajax({
+        url:"actualizar.php",
+        type:"POST",
+        dateType:"html",
+        data:{
+            'idReceta':idReceta,
+            'idMedicamento':idMedicamento,
+            'cantidad':cantidad,
+            'idE':idDetalle
+        },
+        success:function(respuesta){
 
             alertify.set('notifier','position', 'bottom-right');
             alertify.success('Se ha actualizado el registro' );
             $("#frmActuliza")[0].reset();
             $("#modalEditar").modal("hide");
-          llenar_codigo();
-          llenar_medicamento();
-            },
-            error:function(xhr,status){
-                alert(xhr);
-            },
-        });
-        e.preventDefault();
-        return false;
+            llenar_lista();
+        },
+        error:function(xhr,status){
+            alert(xhr);
+        },
+    });
+    e.preventDefault();
+    return false;
 });
 
 function status(concecutivo,id){
@@ -173,9 +180,9 @@ function status(concecutivo,id){
         type:"POST",
         dateType:"html",
         data:{
-                'valor':valor,
-                'id':id
-             },
+            'valor':valor,
+            'id':id
+        },
         success:function(respuesta){
             // console.log(respuesta);
         },
@@ -190,7 +197,7 @@ function imprimir(){
     var titular = "Lista de personas";
     var mensaje = "¿Deseas generar un archivo con PDF oon la lista de personas activas";
     // var link    = "pdfListaPersona.php?id="+idPersona+"&datos="+datos;
-    var link    = "pdfListaPersona.php?";
+    var link    = "pdf/index.php?";
 
     alertify.confirm('alert').set({transition:'zoom',message: 'Transition effect: zoom'}).show();
     alertify.confirm(
@@ -198,14 +205,14 @@ function imprimir(){
         mensaje, 
         function(){ 
             window.open(link,'_blank');
-            }, 
+        }, 
         function(){ 
-                alertify.error('Cancelar') ; 
+            alertify.error('Cancelar') ; 
                 // console.log('cancelado')
-              }
-    ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
-  }
-  function llenar_medicamento()
+            }
+            ).set('labels',{ok:'Generar PDF',cancel:'Cancelar'}); 
+}
+function llenar_medicamento()
 {
     // alert(idRepre);
     $.ajax({
@@ -257,7 +264,9 @@ function llenar_codigoD(idReceta)
             alert('Disculpe, existió un problema');
         },
     });
-}function llenar_medicamentoD(idMedicamento)
+}
+
+function llenar_medicamentoD(idMedicamento)
 {
     // alert(idRepre);
     $.ajax({

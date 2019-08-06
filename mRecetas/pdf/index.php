@@ -33,7 +33,7 @@ $consulta=mysql_query("SELECT
   $pdf->Cell(45, 6, 'Descripcion', 1, 0, 'L', 1);
   $pdf->Cell(45, 6, 'Medicamento', 1, 0, 'L', 1);
   $pdf->Cell(20, 6, 'Cantidad', 1, 0, 'C', 1);
-  $pdf->Cell(25, 6, 'Folio', 1, 1, 'C', 1);
+  $pdf->Cell(25, 6, 'Codigo', 1, 1, 'C', 1);
   
   /*$pdf->Cell(85, 6, 'Sede', 1, 1, 'C', 1);*/
   // $pdf->Cell(40, 6, utf8_decode('Categoría'), 1, 0, 'C', 1);
